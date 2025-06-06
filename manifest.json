@@ -1,23 +1,36 @@
 {
-  "manifest_version": 2,
-  "name": "__MSG_extName__",
-  "description": "__MSG_extDescription__",
-  "version": "2.2.0",
+  "manifest_version": 3,
+  "name": "todoistchute",
+  "description": "taskchute extension for todoist",
+  "version": "3.0.0",
   "default_locale": "en",
-  "browser_action": {
-    "default_icon": "img/icon.png"
+  "action": {
+    "default_icon": {
+      "128": "img/icon.png"
+    }
   },
-  "icons": {
-    "128": "img/icon.png"
-  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "css/tc.css",
+        "js/lib/jquery-3.7.1.min.js",
+        "js/tc.js",
+        "js/tc_calender.js"
+      ],
+      "matches": ["https://*.todoist.com/*"]
+    }
+  ],
   "content_scripts": [
     {
       "matches": ["https://*.todoist.com/*"],
-      "js": ["js/lib/jquery-3.6.4.min.js", "js/tc.js", "js/tc_calender.js"],
+      "js": ["js/lib/jquery-3.7.1.min.js", "js/tc.js", "js/tc_calender.js"],
       "css": ["css/tc.css"],
       "run_at": "document_end"
     }
   ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+  },
   "options_page": "options.html",
   "permissions": ["storage"]
 }
